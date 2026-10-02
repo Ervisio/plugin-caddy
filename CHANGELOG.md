@@ -1,5 +1,9 @@
 # Changelog
 
+## 1.0.1
+
+* The plugin has a logo: the Caddy logo is shown instead of the generic icon in the rail, Plugins and Browse (consoles newer than 0.4.0; older ones keep the icon).
+
 ## 1.0.0
 
 First release. Manage Caddy from Ervisio, whether it runs as the system service (caddy.service) or in a Docker
