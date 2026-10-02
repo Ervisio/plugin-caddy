@@ -1,0 +1,60 @@
+{
+	email admin@fonlogen.it
+	servers {
+		trusted_proxies static private_ranges
+	}
+}
+
+(secure) {
+	header {
+		Strict-Transport-Security "max-age=31536000"
+		X-Content-Type-Options nosniff
+		X-Frame-Options DENY
+	}
+}
+
+photos.fonlogen.it {
+	reverse_proxy immich-server:2283
+	request_body {
+		max_size 50GB
+	}
+	encode zstd gzip
+}
+
+cloud.fonlogen.it {
+	import secure
+	reverse_proxy nextcloud-app:80
+	redir /.well-known/carddav /remote.php/dav 301
+}
+
+vault.fonlogen.it {
+	import secure
+	reverse_proxy vaultwarden:80
+	encode zstd gzip
+	log {
+		output file /var/log/caddy/vault.log
+	}
+}
+
+admin.fonlogen.it {
+	basic_auth {
+		fonlogen $2a$14$Zkx19XLiW6VYouLHR5NmfOFU0z2GTNmpkT/5qqR7hx4IjWJPDhjvG
+	}
+	reverse_proxy localhost:9090
+}
+
+status.fonlogen.it {
+	reverse_proxy uptime-kuma:3001
+}
+
+fonlogen.it, www.fonlogen.it {
+	root * /srv/www/fonlogen
+	file_server
+	encode zstd gzip
+}
+
+old.fonlogen.it {
+	redir https://fonlogen.it{uri} permanent
+}
+
+import sites/*.caddy

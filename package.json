@@ -1,0 +1,23 @@
+{
+  "name": "ervisio-plugin-caddy",
+  "private": true,
+  "version": "1.0.0",
+  "type": "module",
+  "license": "MIT",
+  "scripts": {
+    "build": "tsc --noEmit && vite build && ervisio-plugin-pack copy",
+    "dev": "ervisio-plugin-pack copy && vite build --watch",
+    "pack": "ervisio-plugin-pack pack",
+    "typecheck": "tsc --noEmit",
+    "test": "node --test --experimental-strip-types test/*.test.ts"
+  },
+  "dependencies": {
+    "bcryptjs": "^3.0.2"
+  },
+  "devDependencies": {
+    "@ervisio/plugin-sdk": "github:Ervisio/plugin-sdk#v0.1.0",
+    "@types/react": "^18.3.31",
+    "typescript": "^6.0.3",
+    "vite": "^8.3.2"
+  }
+}
