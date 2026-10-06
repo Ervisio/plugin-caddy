@@ -81,10 +81,9 @@ docker run -d --name caddy --network caddytest -p 127.0.0.1:8443:443 -v "$PWD/Ca
 
 ## Releasing
 
-1. Set the version in `plugin/manifest.json` and `package.json`, add a `## X.Y.Z` section to `CHANGELOG.md` (say
-   when a release asks for new permissions, and why).
-2. Commit, then `git tag -a vX.Y.Z -m "X.Y.Z" && git push origin vX.Y.Z`.
-3. The release workflow builds, validates the manifest with Ervisio's own validator and publishes
-   `caddy-X.Y.Z.tar.gz` and its `.sha256` (unsigned).
-4. The Ervisio plugin registry, [Ervisio/plugins](https://github.com/Ervisio/plugins), picks the release up, a
-   maintainer reviews it, and the registry signs it and lists it in the marketplace.
+On GitHub: **Actions › Release › Run workflow**, choose `patch`, `minor` or `major`, optionally type the release notes
+(empty: the commit subjects since the last release), and run it. The workflow bumps the version, writes the
+`CHANGELOG.md` section, tags, builds, validates and releases, then tells the Ervisio registry: an update that asks for
+no new permissions is in the marketplace a few minutes later. The steps live in
+[Ervisio/plugin-sdk](https://github.com/Ervisio/plugin-sdk/blob/main/docs/publishing.md).
+
