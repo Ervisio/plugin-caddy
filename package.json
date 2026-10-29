@@ -9,7 +9,9 @@
     "dev": "ervisio-plugin-pack copy && vite build --watch",
     "pack": "ervisio-plugin-pack pack",
     "typecheck": "tsc --noEmit",
-    "test": "node --test --experimental-strip-types test/*.test.ts"
+    "test": "node --test --experimental-strip-types test/*.test.ts",
+    "release": "node .github/release.mjs",
+    "marketplace": "node .github/release.mjs register"
   },
   "dependencies": {
     "bcryptjs": "^3.0.2"
