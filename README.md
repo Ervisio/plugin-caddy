@@ -92,4 +92,4 @@ no new permissions is in the marketplace a few minutes later. The steps live in
 
 When the account uses ErvisiOS, this plugin opens a desktop workspace with a persistent list of Caddy instances, direct navigation to sites, Caddyfile, certificates and logs, and a status bar showing the active configuration. Site editing, validation, reload and configuration history use the same backend as Classic. The original header, instance menu and tabs remain available in Classic.
 
-The page opts in with `contributes.pages[].ervisios.view: "caddy-desktop"` and registers both views from the same entry module. It requires an Ervisio build that supports native ErvisiOS plugin views. No additional server permissions are requested.
+The page opts in with `contributes.pages[].ervisios.view: "caddy-desktop"` and registers both views from the same entry module. This version requires Ervisio 0.7.0 or later and builds with plugin SDK 0.4.0 (contract 4). No additional server permissions are requested.

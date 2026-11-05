@@ -399,6 +399,7 @@
   "homepage": "https://github.com/Ervisio/plugin-caddy",
   "icon": "globe",
   "id": "caddy",
+  "minCore": "0.7.0",
   "name": "Caddy",
   "version": "1.0.1",
   "visibleTo": {
