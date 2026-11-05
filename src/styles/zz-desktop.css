@@ -1,0 +1,30 @@
+/* Native ErvisiOS Caddy workspace. Each instance and tool is directly reachable. */
+.cd-desktop { padding:0; gap:0; min-height:100%; }
+.cd-desktop .cd-head { min-height:58px; padding:10px 14px; gap:9px; border-bottom:1px solid color-mix(in srgb,var(--ink) 10%,transparent); background:color-mix(in srgb,var(--surface) 80%,var(--sunk)); }
+.cd-desktop .cd-head h1 { font-size:17px; letter-spacing:normal; }
+.cd-desktop .cd-head .ui-btn { border-radius:6px; }
+.cd-desktop-current { color:var(--ink2); font-size:11px; }
+.cd-desktop .cd-status { font-size:11px; }
+.cd-desktop-workspace { display:flex; flex:1; min-height:0; }
+.cd-desktop-nav { display:flex; flex-direction:column; gap:4px; width:200px; flex:none; padding:12px 8px; background:var(--sunk); border-right:1px solid color-mix(in srgb,var(--ink) 10%,transparent); }
+.cd-desktop-caption { font-size:11px; color:var(--ink2); padding:6px 8px 9px; }
+.cd-root .cd-desktop-instance { display:flex; align-items:center; gap:9px; text-align:left; padding:9px 8px!important; border-radius:6px; width:100%; }
+.cd-desktop-instance>span { min-width:0; display:grid; gap:3px; }
+.cd-desktop-instance b { font-size:12px; overflow:hidden; text-overflow:ellipsis; white-space:nowrap; }
+.cd-desktop-instance small { font-size:10px; color:var(--ink2); }
+.cd-desktop-instance:hover { background:var(--surface)!important; }
+.cd-desktop-instance.active { background:var(--acc-s)!important; color:var(--acc)!important; }
+.cd-desktop-nav nav { display:flex; flex-direction:column; gap:3px; margin:16px 0; }
+.cd-root .cd-desktop-nav nav button { display:flex; align-items:center; gap:10px; text-align:left; padding:9px 8px!important; min-height:35px; border-radius:6px; color:var(--ink2); font-size:12px; }
+.cd-desktop-nav nav button:hover { background:var(--surface)!important; color:var(--ink); }
+.cd-desktop-nav nav button.active { background:var(--surface)!important; color:var(--acc); }
+.cd-desktop-nav nav button>b { margin-left:auto; color:var(--ink2); font-size:10px; }
+.cd-desktop-configpath { margin-top:auto; padding:8px; overflow-wrap:anywhere; font:10px/1.5 var(--cd-mono); color:var(--ink2); }
+.cd-desktop-main { flex:1; min-width:0; padding:16px; display:flex; flex-direction:column; }
+.cd-desktop .cd-view { flex:1; }
+.cd-desktop .cd-lh { padding:0 0 12px; }
+.cd-desktop .cd-wr { border-radius:6px; }
+.cd-desktop-status { display:flex; align-items:center; gap:18px; padding:7px 14px; min-height:30px; border-top:1px solid color-mix(in srgb,var(--ink) 10%,transparent); color:var(--ink2); font-size:10px; background:var(--sunk); }
+.cd-desktop-status code { margin-left:auto; font-size:10px; font-family:var(--cd-mono); overflow:hidden; text-overflow:ellipsis; white-space:nowrap; }
+@media(max-width:760px){.cd-desktop-workspace{flex-direction:column}.cd-desktop-nav{width:100%;padding:8px;flex-direction:row;overflow:auto;border-right:0}.cd-desktop-caption,.cd-desktop-configpath{display:none}.cd-root .cd-desktop-instance{min-width:130px;width:auto}.cd-desktop-nav nav{flex-direction:row;margin:0;gap:4px}.cd-desktop-nav nav button{white-space:nowrap}.cd-desktop-main{padding:12px}.cd-desktop-status{flex-wrap:wrap;gap:8px}.cd-desktop .cd-status{display:none}}
+@media(prefers-reduced-motion:reduce){.cd-desktop *{transition:none!important;animation:none!important}}

@@ -370,7 +370,10 @@
       {
         "icon": "globe",
         "id": "caddy",
-        "title": "Caddy"
+        "title": "Caddy",
+        "ervisios": {
+          "view": "caddy-desktop"
+        }
       }
     ],
     "snippets": [

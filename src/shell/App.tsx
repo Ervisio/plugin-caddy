@@ -1,10 +1,10 @@
 import { useEffect, useState } from 'react';
 import { reloadOnly } from '../api/actions';
 import { errorText } from '../api/run';
-import { detection, initSelection, lookInDocker, useCurrent, useNow } from '../api/state';
+import { chooseInstance, detection, initSelection, lookInDocker, useCurrent, useNow } from '../api/state';
 import { useMaybe } from '../api/store';
 import { t } from '../i18n';
-import { Button, DropdownMenu, EmptyState, IconButton, Tabs, toast } from '../kit';
+import { Button, DropdownMenu, EmptyState, Icon, IconButton, Tabs, toast } from '../kit';
 import { getSdk } from '../sdk';
 import { duration } from '../ui/format';
 import { CaddyfileView } from '../views/CaddyfileView';
@@ -15,7 +15,9 @@ import { InstanceMenu } from './InstanceMenu';
 import { go, nav, type TabId } from './nav';
 
 /** The page: header with the server switcher, tabs, and the tab's view. */
-export function App() {
+export function ErvisiOSApp() { return <App desktop />; }
+
+export function App({ desktop = false }: { desktop?: boolean } = {}) {
   const det = detection.use();
   const cur = useCurrent();
   const n = nav.use();
@@ -35,11 +37,11 @@ export function App() {
   if (!det.data) {
     if (det.error)
       return (
-        <div className="cd-root hue-term">
+        <div className={`cd-root hue-term${desktop ? ' cd-desktop' : ''}`}>
           <EmptyState icon="alert" hue="svc" title={t('shell.detectFailed')} text={det.error.message} action={<Button icon="refresh" onClick={() => void detection.refresh()}>{t('common.retry')}</Button>} />
         </div>
       );
-    return <div className="cd-root hue-term"><div className="cd-loading">{t('shell.looking')}</div></div>;
+    return <div className={`cd-root hue-term${desktop ? ' cd-desktop' : ''}`}><div className="cd-loading">{t('shell.looking')}</div></div>;
   }
 
   if (!cur) return <NotFound skipped={det.data.dockerSkipped} dockerError={det.data.dockerError} />;
@@ -87,10 +89,11 @@ export function App() {
   ];
 
   return (
-    <div className="cd-root hue-term">
+    <div className={`cd-root hue-term${desktop ? ' cd-desktop' : ''}`}>
       <header className="cd-head">
         <h1>Caddy</h1>
-        <InstanceMenu />
+        {desktop ? <span className="cd-desktop-current">{inst.name}</span> : <InstanceMenu />}
+        {desktop && <IconButton icon="refresh" label={t('menu.again')} onClick={() => { void detection.refresh(); void data.config.refresh(); void data.certs.refresh(); }} />}
         <div className="cd-sp" />
         <span className="cd-status">{status}</span>
         {inst.running ? (
@@ -114,11 +117,26 @@ export function App() {
         )}
       </header>
 
+      <div className={desktop ? 'cd-desktop-workspace' : undefined} style={desktop ? undefined : { display: 'contents' }}>
+      {desktop && <aside className="cd-desktop-nav" aria-label={t('menu.title')}>
+        <div className="cd-desktop-caption">{t('menu.title')}</div>
+        {det.data.instances.map((item) => <button type="button" key={item.key} className={`cd-desktop-instance${item.key === inst.key ? ' active' : ''}`} aria-pressed={item.key === inst.key}
+          onClick={() => { chooseInstance(item.key); go('sites', { site: null, jump: null }); }}>
+          <Icon name={item.kind === 'docker' ? 'box' : 'server'} size={16} /><span><b>{item.name}</b><small>{t(item.running ? 'inst.running' : 'inst.stopped')}</small></span>
+        </button>)}
+        <nav aria-label={t('tab.aria')}>
+          {tabs.map((tab) => <button type="button" key={tab.id} className={n.tab === tab.id ? 'active' : ''} aria-current={n.tab === tab.id ? 'page' : undefined}
+            onClick={() => go(tab.id as TabId)}><Icon name={tab.icon} size={16} /><span>{tab.label}</span>{tab.count !== undefined && <b>{tab.count}</b>}</button>)}
+        </nav>
+        {det.data.dockerSkipped && <Button size="sm" icon="unlock" onClick={() => void lookInDocker()}>{t('menu.lookDocker')}</Button>}
+        <code className="cd-desktop-configpath" title={inst.configPath}>{inst.configPath}</code>
+      </aside>}
+      <main className={desktop ? 'cd-desktop-main' : undefined} style={desktop ? undefined : { display: 'contents' }}>
       {inst.unsupported ? (
         <Unsupported />
       ) : (
         <>
-          <Tabs variant="pill" hue="term" items={tabs} value={n.tab} onChange={(id) => go(id as TabId)} aria-label={t('tab.aria')} className="cd-tabs" />
+          {!desktop && <Tabs variant="pill" hue="term" items={tabs} value={n.tab} onChange={(id) => go(id as TabId)} aria-label={t('tab.aria')} className="cd-tabs" />}
           <div className="cd-view">
             {n.tab === 'sites' && <SitesView />}
             {n.tab === 'caddyfile' && <CaddyfileView />}
@@ -127,6 +145,9 @@ export function App() {
           </div>
         </>
       )}
+      </main>
+      </div>
+      {desktop && <footer className="cd-desktop-status" aria-live="polite"><span>{status}</span><span>{sites === undefined ? t('shell.looking') : `${t('tab.sites')}: ${sites}`}</span><code>{inst.configPath}</code></footer>}
     </div>
   );
 }

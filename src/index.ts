@@ -8,7 +8,7 @@ import { setSdk, type PluginSDK } from './sdk';
 import { registerAllStrings, t } from './i18n';
 import { injectStyles } from './styles';
 import { registerIcons } from './ui/icons';
-import { App } from './shell/App';
+import { App, ErvisiOSApp } from './shell/App';
 import { SitesWidget } from './views/Widget';
 import { EmptyState } from './kit';
 
@@ -24,5 +24,6 @@ export default function activate(sdk: PluginSDK): void {
   registerIcons();
   const ok = sdk.version >= 3;
   sdk.registerPage('caddy', ok ? App : TooOld);
+  sdk.registerPage('caddy-desktop', ok ? ErvisiOSApp : TooOld);
   sdk.registerWidget({ id: 'sites', render: ok ? SitesWidget : TooOld });
 }
