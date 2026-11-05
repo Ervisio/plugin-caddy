@@ -1,5 +1,11 @@
 # Changelog
 
+## 1.1.0 - 2026-11-05
+
+- Add a native ErvisiOS workspace with persistent Caddy instance navigation, direct Sites, Caddyfile, Certificates and Logs views, and the active configuration in the status bar.
+- Preserve the Classic interface and the existing site editing, validation, reload and configuration history actions.
+- Require Ervisio 0.7.0 or later and build with plugin SDK 0.4.0 (contract 4). No additional server permissions.
+
 ## 1.0.1
 
 * The plugin has a logo: the Caddy logo is shown instead of the generic icon in the rail, Plugins and Browse (consoles newer than 0.4.0; older ones keep the icon).
