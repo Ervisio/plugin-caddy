@@ -1,5 +1,9 @@
 # Changelog
 
+## [1.1.2] - 2026-11-06
+
+- Keep ErvisiOS content inside the Caddy window, with a fixed header/status bar and scrolling confined to the workspace. Fit the Caddyfile editor to resized windows.
+
 ## [1.1.1] - 2026-11-06
 
 - Use the shared folder chooser for host document roots. Container roots retain their own filesystem context.
