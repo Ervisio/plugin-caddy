@@ -1,3 +1,4 @@
+import { PathInput } from '@ervisio/plugin-sdk/paths';
 import { useEffect, useMemo, useState } from 'react';
 import bcrypt from 'bcryptjs';
 import { apply } from '../api/actions';
@@ -265,7 +266,7 @@ export function SiteEditor({ site, onClose }: { site: SiteRef | null; onClose():
         </div>
       )}
       {(form.kind === 'static' || form.kind === 'php') && (
-        <Input label={t('editor.root')} icon="folder" mono value={form.root} error={show('root')} hint={!show('root') ? t('editor.rootHint') : undefined} onChange={(e) => set({ root: e.target.value })} />
+        inst.kind==='docker'?<Input label={t('editor.root')} icon="folder" mono value={form.root} error={show('root')} hint={!show('root') ? t('editor.rootHint') : undefined} onChange={(e) => set({ root: e.target.value })} />:<PathInput label={t('editor.root')} icon="folder" mono mode="folder" value={form.root} error={show('root')} hint={!show('root') ? t('editor.rootHint') : undefined} onPathChange={root=>set({root})} />
       )}
       {form.kind === 'php' && (
         <Input label={t('editor.fpm')} mono value={form.target} error={show('target')} hint={!show('target') ? t('editor.fpmHint') : undefined} onChange={(e) => set({ target: e.target.value })} />
