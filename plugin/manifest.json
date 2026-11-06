@@ -399,9 +399,9 @@
   "homepage": "https://github.com/Ervisio/plugin-caddy",
   "icon": "globe",
   "id": "caddy",
-  "minCore": "0.7.0",
+  "minCore": "7.0.4",
   "name": "Caddy",
-  "version": "1.1.0",
+  "version": "1.1.1",
   "visibleTo": {
     "groups": [
       "wheel",

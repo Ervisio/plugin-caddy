@@ -1,5 +1,10 @@
 # Changelog
 
+## [1.1.1] - 2026-11-06
+
+- Use the shared folder chooser for host document roots. Container roots retain their own filesystem context.
+
+
 ## 1.1.0 - 2026-11-05
 
 - Add a native ErvisiOS workspace with persistent Caddy instance navigation, direct Sites, Caddyfile, Certificates and Logs views, and the active configuration in the status bar.
